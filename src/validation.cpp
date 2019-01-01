@@ -3274,6 +3274,22 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
             return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid YESCRYPT block");
     }
 
+    // Check for algo change 2
+    // Active when fork block reached
+    bool bAlgoSwitch2 = (nHeight >= consensusParams.nFork1MinBlock); // CONDITION HERE
+    if (bAlgoSwitch2)
+    {
+        if (algo == ALGO_SKEIN)
+            return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid SKEIN block");
+    }
+    else
+    {
+        if (algo == ALGO_ARGON2D)
+            return state.Invalid(false, REJECT_INVALID, "invalid-algo", "invalid ARGON2D block");
+    }
+
+
+
     // MIP2 (reservealgo) activated at MIP2Height
     bool bMIP2 = (nHeight >= consensusParams.MIP2Height);
     if (bMIP2)
