@@ -19,10 +19,11 @@ enum {
     ALGO_SKEIN    = 3,
     ALGO_QUBIT    = 4,
     ALGO_YESCRYPT = 5,
+    ALGO_ARGON2D = 6,
     NUM_ALGOS_IMPL
 };
 
-const int NUM_ALGOS = 5;
+const int NUM_ALGOS = 6;
 
 enum
 {
@@ -36,6 +37,7 @@ enum
     BLOCK_VERSION_SKEIN          = (3 << 9),
     BLOCK_VERSION_QUBIT          = (4 << 9),
     BLOCK_VERSION_YESCRYPT       = (5 << 9),
+    BLOCK_VERSION_ARGON2D       = (6 << 9)
 };
 
 /** extract algo from nVersion */
@@ -213,6 +215,9 @@ public:
                 break;
             case ALGO_YESCRYPT:
                 nVersion |= BLOCK_VERSION_YESCRYPT;
+                break;
+            case ALGO_ARGON2D:
+                nVersion |= BLOCK_VERSION_ARGON2D;
                 break;
             default:
                 break;
